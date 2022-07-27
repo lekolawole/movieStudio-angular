@@ -18,8 +18,8 @@ export class UserRegistrationService {
  // Making the api call for the user registration endpoint
   public userRegistration(userDetails: any): Observable<any> {
     console.log(userDetails);
-    return this.http.post(apiUrl + 'users', userDetails).pipe(
-    catchError(this.handleError)
+    return this.http.post(apiUrl + '/users', userDetails).pipe(
+      catchError(this.handleError)
     );
   }
 
@@ -34,6 +34,14 @@ private handleError(error: HttpErrorResponse): any {
     return throwError(
     'Something bad happened; please try again later.');
   }
+
+  // Handles api call for registered user to login
+  public userLogin(userDetails: any): Observable<any> {
+    console.log(userDetails);
+    return this.http.post(apiUrl + '/login', userDetails).pipe(
+      catchError(this.handleError)
+    );
+  }
 }
 
 // User Registration
@@ -42,7 +50,7 @@ export class userRegistration {
 
   userRegistration(): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.post(apiUrl + 'users', {headers: new HttpHeaders(
+    return this.http.post(apiUrl + '/users', {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(
@@ -70,44 +78,13 @@ export class userRegistration {
   }
 }
 
-// User Login
-export class userLogin {
-  constructor(private http: HttpClient) { }
-
-  // Handles api call for registered user
-  public userRegistration(userDetails: any): Observable<any> {
-    console.log(userDetails);
-    return this.http.get(apiUrl + 'login', userDetails).pipe(
-    catchError(this.handleError)
-    );
-  }
-
-  private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-    console.error('Some error occurred:', error.error.message);
-    } else {
-    console.error(
-        `Error Status code ${error.status}, ` +
-        `Error body is: ${error.error}`);
-    }
-    return throwError(
-    'Unable to login. Please try again later.');
-  }
-
-    // Non-typed response extraction
-  private extractResponseData(res: Response | Object): any {
-    const body = res;
-    return body || { };
-  }
-}
-
 // Get all Movies 
 export class getAllMovies {
   constructor(private http: HttpClient) { }
 
   getAllMovies(): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.get(apiUrl + 'movies', {headers: new HttpHeaders(
+    return this.http.get(apiUrl + '/movies', {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(
@@ -178,7 +155,7 @@ export class getDirector {
 
   getDirector(name: any): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.get(apiUrl + `movies/MovieDirector/${name}`, {headers: new HttpHeaders(
+    return this.http.get(apiUrl + `/movies/MovieDirector/${name}`, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(
@@ -213,7 +190,7 @@ export class getGenre {
 
   getGenre(name: any): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.get(apiUrl + `movies/genre/${name}`, {headers: new HttpHeaders(
+    return this.http.get(apiUrl + `/movies/genre/${name}`, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(
@@ -249,7 +226,7 @@ export class getUser {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('user');
     
-    return this.http.get(apiUrl + `users/${username}`, {headers: new HttpHeaders(
+    return this.http.get(apiUrl + `/users/${username}`, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(
@@ -285,7 +262,7 @@ export class getFavoriteMovies {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('user');
     
-    return this.http.get(apiUrl + `users/${username}/movies`, {headers: new HttpHeaders(
+    return this.http.get(apiUrl + `/users/${username}/movies`, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(
@@ -322,7 +299,7 @@ export class addFavorite {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('user');
     
-    return this.http.post(apiUrl + `users/${username}/movies/${movieID}`, {headers: new HttpHeaders(
+    return this.http.post(apiUrl + `/users/${username}/movies/${movieID}`, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(
@@ -359,7 +336,7 @@ export class removeFavorite {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('user');
     
-    return this.http.delete(apiUrl + `users/${username}/movies${movieID}`, {headers: new HttpHeaders(
+    return this.http.delete(apiUrl + `/users/${username}/movies${movieID}`, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(
@@ -395,7 +372,7 @@ export class editUser {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('user');
     
-    return this.http.put(apiUrl + `users/${username}`, updateUserDetails, {headers: new HttpHeaders(
+    return this.http.put(apiUrl + `/users/${username}`, updateUserDetails, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(
@@ -431,7 +408,7 @@ export class deleteUser {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('user');
     
-    return this.http.delete(apiUrl + `users/${username}`, {headers: new HttpHeaders(
+    return this.http.delete(apiUrl + `/users/${username}`, {headers: new HttpHeaders(
       {
         Authorization: 'Bearer ' + token,
       })}).pipe(
@@ -458,3 +435,35 @@ export class deleteUser {
     return body || { };
   }
 }
+
+
+// User Login
+// export class userLogin {
+//   constructor(private http: HttpClient) { }
+
+//   // Handles api call for registered user
+//   public userLogin(userDetails: any): Observable<any> {
+//     console.log(userDetails);
+//     return this.http.get(apiUrl + '/login', userDetails).pipe(
+//     catchError(this.handleError)
+//     );
+//   }
+
+//   private handleError(error: HttpErrorResponse): any {
+//     if (error.error instanceof ErrorEvent) {
+//     console.error('Some error occurred:', error.error.message);
+//     } else {
+//     console.error(
+//         `Error Status code ${error.status}, ` +
+//         `Error body is: ${error.error}`);
+//     }
+//     return throwError(
+//     'Unable to login. Please try again later.');
+//   }
+
+//     // Non-typed response extraction
+//   private extractResponseData(res: Response | Object): any {
+//     const body = res;
+//     return body || { };
+//   }
+// }
