@@ -14,6 +14,9 @@ export class ProfilePageComponent implements OnInit {
   user: any = {};
   movies: any = [];
   username: any = localStorage.getItem('user');
+  favMovies: any[] = [];
+  favs: any = null;
+  displayElement: boolean = false;
 
   constructor(
     public fetchDataApi: UserRegistrationService,
@@ -32,6 +35,15 @@ export class ProfilePageComponent implements OnInit {
     if (user) {
       this.fetchDataApi.getUser().subscribe((resp: any) => {
         this.user = resp;
+        this.fetchDataApi.getAllMovies().subscribe((resp: any) => {
+          this.movies = resp;
+          this.movies.forEach((movie: any) => {
+            if (this.user.FavoriteMovies.includes(movie._id)) {
+              this.favMovies.push(movie);
+              this.displayElement = true;
+            }
+          })
+        })
       })
     }
   }
@@ -43,6 +55,18 @@ export class ProfilePageComponent implements OnInit {
   openEditProfileDialog(): void {
     this.dialog.open(EditProfileComponent, {
       width: 'max-content'
+    })
+  }
+
+  // remove favorite Movie 
+  removeFav(id: string): void {
+    this.fetchDataApi.removeFavorite(id).subscribe((res: any) => {
+      this.snackBar.open('{{movie.Title}} was removed.', 'OK', {
+        duration: 2000,
+      });
+      this.ngOnInit();
+      window.location.reload();
+      return this.favs;
     })
   }
 }

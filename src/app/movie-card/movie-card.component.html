@@ -30,7 +30,10 @@
             >
                 Summary
             </button>
-            <mat-icon>favorite_border</mat-icon>
+            <button mat-icon-button>
+                <mat-icon *ngIf="!isFav(movie._id)"(click)="addFavorite(movie._id)">favorite_border</mat-icon>
+                <mat-icon [ngStyle]="{'color':'white'}" *ngIf="isFav(movie._id)">favorite</mat-icon>
+            </button>
         </mat-card-actions>
     </mat-card>
 </div>

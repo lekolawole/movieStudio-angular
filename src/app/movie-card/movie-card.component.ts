@@ -17,6 +17,8 @@ import { MovieDetailsCardComponent } from '../movie-details-card/movie-details-c
 export class MovieCardComponent implements OnInit {
   // Returns movies from API in variable called movies
   movies: any[] = [];
+  userFavs: any[] = [];
+
   constructor(
     public fetchApiData: UserRegistrationService, 
     public dialog: MatDialog,
@@ -25,7 +27,8 @@ export class MovieCardComponent implements OnInit {
 
   ngOnInit(): void {
     // Newly implemented function that will fetch movies from fetchApiDataService
-    this.getAllMovies()
+    this.getAllMovies();
+    this.getUser;
   }
 
   // Defining what getMovies() will do 
@@ -69,6 +72,29 @@ export class MovieCardComponent implements OnInit {
       },
       width: '500px',
     })
+  }
+
+  // Adds movies to Favorite Movies array 
+  // Expects Movie ID
+  addFavorite(id: string): void {
+    const token = localStorage.getItem('token');
+    this.fetchApiData.addFavorite(id).subscribe((response: any) => {
+      console.log(response);
+      this.ngOnInit();
+    });
+  }
+
+  // Gets user to check Favorites 
+  getUser(): void {
+    const username = localStorage.getItem('user');
+    this.fetchApiData.getUser().subscribe((resp: any) => {
+      this.userFavs = resp.user.FavoriteMovies;
+    })
+
+  }
+  // Checks if movie is already favorited (T/F)
+  isFav(id: string): boolean {
+    return this.userFavs.includes(id);
   }
 
   toProfile(): void {
