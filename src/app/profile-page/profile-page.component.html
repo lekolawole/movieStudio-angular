@@ -17,19 +17,19 @@
   </mat-card>
 </mat-card>
 <mat-card class="card-container fav-movies-container">
-  <mat-card-header>
+  <mat-card-header class="card-header">
     <mat-card-title>My Movies</mat-card-title>
   </mat-card-header>
-  <div style="display: flex;">
-    <mat-card *ngFor="let movie of favMovies; let i = index" style="flex: 1 1 auto;">
+  <div class="scroll-container">
+    <mat-card *ngFor="let movie of favMovies; let i = index" class="movie-card">
       <mat-card-header>
-        <mat-card-subtitle>{{ movie.Title }}</mat-card-subtitle>
-        <button class="remove-button" mat-button color="accent" (click)="removeFav(movie._id)">
-          <mat-icon>favorite_border</mat-icon>
-        </button>
+        
       </mat-card-header>
       <mat-card-content>
         <img src={{movie.ImagePath}} alt= {{movie.Title}} width="180"/>
+        <button class="remove-button" mat-button color="accent" (click)="removeFav(movie._id)">
+          <mat-icon>favorite_border</mat-icon>
+        </button>
       </mat-card-content>
     </mat-card>
   </div>

@@ -1,0 +1,31 @@
+.nav {
+  display: flex;
+  padding-bottom: 5%;
+}
+
+h1 {
+  color: white;
+  margin: 0 auto;
+  padding-top: 2%;
+  font-weight: bold;
+  letter-spacing: 0.6rem;
+  text-transform: uppercase;
+}
+
+.account-btn {
+  margin: 2%;
+}
+
+.movie-container {
+  display: flex;
+  overflow-x: scroll;
+  background-color: black;
+}
+
+.movie-card {
+  margin-left: 2%;
+}
+
+.removeFavButton {
+  display: none;
+}

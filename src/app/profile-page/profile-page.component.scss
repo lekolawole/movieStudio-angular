@@ -1,5 +1,7 @@
+$primary: #FF4080;
+
 .profile-container {
-  margin-top: 2%;
+  //margin-top: 2%;
   background-color: black;
 }
 
@@ -10,8 +12,25 @@
 .card-container {
   margin: 0 20%;
 }
+.card-header {
+  color: white;
+  padding-top: 1%;
+  border-radius: 3rem;
+  
+}
 
 .fav-movies-container {
+  background-color: #3F50B5;
   margin-top: 3%;
   margin-bottom: 5%;
+}
+
+.scroll-container {
+  overflow-x: scroll;
+  display: flex;
+  padding: 2%;
+}
+
+.movie-card {
+  margin-right: 2%;
 }
