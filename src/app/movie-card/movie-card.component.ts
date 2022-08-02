@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+
 
 import { UserRegistrationService } from '../fetch-api-data.service'
 import { GenreCardComponent } from '../genre-card/genre-card.component';
@@ -17,7 +19,8 @@ export class MovieCardComponent implements OnInit {
   movies: any[] = [];
   constructor(
     public fetchApiData: UserRegistrationService, 
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public router: Router
   ) { }
 
   ngOnInit(): void {
@@ -66,5 +69,9 @@ export class MovieCardComponent implements OnInit {
       },
       width: '500px',
     })
+  }
+
+  toProfile(): void {
+    this.router.navigate(['profile']);
   }
 }

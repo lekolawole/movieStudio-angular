@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 const appRoutes: Routes = [
   { path: 'welcome', component: WelcomePageComponent },
   { path: 'movies', component: MovieCardComponent },
+  { path: 'profile', component: ProfilePageComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
 
@@ -23,6 +24,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatIconModule } from '@angular/material/icon';
+//import { MatToolbar } from '@angular/material/toolbar';
 
 import { UserRegistrationFormComponent } from './user-registration-form/user-registration-form.component';
 import { UserLoginFormComponent } from './user-login-form/user-login-form.component';
@@ -31,6 +33,8 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { GenreCardComponent } from './genre-card/genre-card.component';
 import { DirectorCardComponent } from './director-card/director-card.component';
 import { MovieDetailsCardComponent } from './movie-details-card/movie-details-card.component';
+import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +45,9 @@ import { MovieDetailsCardComponent } from './movie-details-card/movie-details-ca
     WelcomePageComponent,
     GenreCardComponent,
     DirectorCardComponent,
-    MovieDetailsCardComponent
+    MovieDetailsCardComponent,
+    ProfilePageComponent,
+    EditProfileComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -56,6 +62,7 @@ import { MovieDetailsCardComponent } from './movie-details-card/movie-details-ca
     MatFormFieldModule, 
     MatDialogModule, 
     MatSnackBarModule, 
+    //MatToolbar,
     FormsModule
   ],
   providers: [],

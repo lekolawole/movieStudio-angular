@@ -1,0 +1,27 @@
+<div class="profile-container">
+  <nav class="nav-container">
+    <button mat-raised-button color="primary" (click)="toMain()">Back to Movies</button>
+  </nav>
+  <mat-card class="card-container">
+    <mat-card-header>
+      <mat-card-title>My Profile</mat-card-title>
+      <mat-card-subtitle>Hello, {{ user.Username }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card>
+      <mat-card-content>
+        <h3>Username: {{ user.Username }}</h3> 
+        <h3>Email: {{user.Email }}</h3> 
+        <h3>Birthday: {{ user.Birthday | date }}</h3> 
+        <button mat-raised-button color="accent" (click)="openEditProfileDialog()">Edit</button>
+      </mat-card-content>
+  </mat-card>
+</mat-card>
+<mat-card class="card-container fav-movies-container">
+  <mat-card-header>
+    <mat-card-title>My Movies</mat-card-title>
+  </mat-card-header>
+  <div>
+    movies
+  </div>
+</mat-card>
+</div>

@@ -60,6 +60,34 @@ private handleError(error: HttpErrorResponse): any {
         catchError(this.handleError)
     );
   }
+
+  // Handles Profile 
+  getUser(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('user');
+    
+    return this.http.get(apiUrl + `/users/${username}`, {headers: new HttpHeaders(
+      {
+        Authorization: 'Bearer ' + token,
+      })}).pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+    );
+  }
+
+  // Handles Editing user profile 
+  editUser(updateUserDetails: any): Observable<any> {
+    const token = localStorage.getItem('token');
+    const username = localStorage.getItem('user');
+    
+    return this.http.put(apiUrl + `/users/${username}`, updateUserDetails, {headers: new HttpHeaders(
+      {
+        Authorization: 'Bearer ' + token,
+      })}).pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+    );
+  }
 }
 
 // User Registration
