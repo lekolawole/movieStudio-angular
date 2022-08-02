@@ -1,9 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { MatDialogRef } from '@angular/material/dialog';
-
 import { UserRegistrationService } from '../fetch-api-data.service';
-
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -17,6 +16,7 @@ export class UserLoginFormComponent implements OnInit {
     public fetchApiData: UserRegistrationService,
     public dialogRef: MatDialogRef<UserLoginFormComponent>,
     public snackBar: MatSnackBar,
+    public router: Router
   ) { }
 
   
@@ -41,5 +41,7 @@ export class UserLoginFormComponent implements OnInit {
           duration: 2000
       });
     });
+    // Navigate to movies page
+    this.router.navigate(['movies']);
   }
 }

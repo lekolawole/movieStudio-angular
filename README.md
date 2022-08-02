@@ -11,7 +11,7 @@ Using Angular, build the client-side for an application called myFlix based on i
 
 - Angular
 - TypeScript
-- Material UI
+- Angular Material
 
 ## Build
 

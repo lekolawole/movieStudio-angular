@@ -42,6 +42,24 @@ private handleError(error: HttpErrorResponse): any {
       catchError(this.handleError)
     );
   }
+
+  // Non-typed response extraction
+  private extractResponseData(res: Response | Object): any {
+    const body = res;
+    return body || { };
+  }
+
+  // Handles API to fetch movies
+  getAllMovies(): Observable<any> {
+    const token = localStorage.getItem('token');
+    return this.http.get(apiUrl + '/movies', {headers: new HttpHeaders(
+      {
+        Authorization: 'Bearer ' + token,
+      })}).pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+    );
+  }
 }
 
 // User Registration
