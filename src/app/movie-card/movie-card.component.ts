@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 import { UserRegistrationService } from '../fetch-api-data.service'
@@ -16,26 +17,29 @@ import { MovieDetailsCardComponent } from '../movie-details-card/movie-details-c
 })
 export class MovieCardComponent implements OnInit {
   // Returns movies from API in variable called movies
+  user: any = {};
   movies: any[] = [];
-  userFavs: any[] = [];
+  favoriteMovies: any[] = [];
+  favs: any = null;
 
   constructor(
     public fetchApiData: UserRegistrationService, 
     public dialog: MatDialog,
+    public snackBar: MatSnackBar,
     public router: Router
   ) { }
 
   ngOnInit(): void {
     // Newly implemented function that will fetch movies from fetchApiDataService
     this.getAllMovies();
-    this.getUser;
+    this.getUser();
   }
 
   // Defining what getMovies() will do 
   getAllMovies(): void {
-    this.fetchApiData.getAllMovies().subscribe((resp: any) => {
-      this.movies = resp;
-      console.log(this.movies);
+    this.fetchApiData.getAllMovies().subscribe((response: any) => {
+      this.movies = response;
+      //console.log(this.movies);
       return this.movies;
     });
   }
@@ -79,25 +83,47 @@ export class MovieCardComponent implements OnInit {
   addFavorite(id: string): void {
     const token = localStorage.getItem('token');
     this.fetchApiData.addFavorite(id).subscribe((response: any) => {
-      console.log(response);
+      // console.log(response);
       this.ngOnInit();
+      return this.favs;
     });
   }
 
   // Gets user to check Favorites 
   getUser(): void {
     const username = localStorage.getItem('user');
-    this.fetchApiData.getUser().subscribe((resp: any) => {
-      this.userFavs = resp.user.FavoriteMovies;
+    this.fetchApiData.getUser().subscribe((response: any) => {
+      this.favoriteMovies = response.FavoriteMovies;
+      console.log(this.favoriteMovies);
     })
-
   }
+
+  getFavoriteMovies(): void {
+    this.fetchApiData.getFavoriteMovies().subscribe((response: any) => {
+      this.favoriteMovies = response.user.FavoriteMovies;
+      console.log(response);
+      return this.favoriteMovies;
+    });
+  }
+
   // Checks if movie is already favorited (T/F)
   isFav(id: string): boolean {
-    return this.userFavs.includes(id);
+    return this.favoriteMovies.includes(id);
+  }
+
+  removeFav(id: string): void {
+    this.fetchApiData.removeFavorite(id).subscribe((res: any) => {
+      this.ngOnInit();
+      return this.favs;
+    });
   }
 
   toProfile(): void {
     this.router.navigate(['profile']);
+  }
+
+  logout(): void {
+    localStorage.clear();
+    this.router.navigate(['welcome']);
   }
 }

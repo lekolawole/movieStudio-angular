@@ -1,9 +1,14 @@
 <div class="profile-container">
   <nav class="nav-container">
-    <button mat-raised-button color="primary" (click)="toMain()">Back to Movies</button>
+    <button mat-raised-button class="movies-back-btn" color="primary" (click)="toMain()">
+      <mat-icon>home</mat-icon>
+    </button>
+        <h1>Movie Studio</h1>
+    <button class="account-btn" mat-raised-button color="primary" (click)="logout()">Logout</button>
   </nav>
   <mat-card class="card-container">
     <mat-card-header>
+      <mat-icon>account_circle</mat-icon>
       <mat-card-title>My Profile</mat-card-title>
       <mat-card-subtitle>Hello, {{ user.Username }}</mat-card-subtitle>
     </mat-card-header>
@@ -12,23 +17,27 @@
         <h3>Username: {{ user.Username }}</h3> 
         <h3>Email: {{user.Email }}</h3> 
         <h3>Birthday: {{ user.Birthday | date }}</h3> 
-        <button mat-raised-button color="accent" (click)="openEditProfileDialog()">Edit</button>
+        <div class="profile-btns">
+          <button mat-raised-button color="accent" (click)="openEditProfileDialog()">Edit</button>
+          <button class="delete-btn" mat-raised-button color="primary" (click)="deleteUser()">
+            <mat-icon>delete</mat-icon>Delete Account
+          </button>
+        </div>
+        
       </mat-card-content>
   </mat-card>
 </mat-card>
 <mat-card class="card-container fav-movies-container">
   <mat-card-header class="card-header">
     <mat-card-title>My Movies</mat-card-title>
+    <mat-card-subtitle class="displayMessage" *ngIf="user.FavoriteMovies == 0">Looks pretty lonely over here. Add some Movies!</mat-card-subtitle>
   </mat-card-header>
   <div class="scroll-container">
     <mat-card *ngFor="let movie of favMovies; let i = index" class="movie-card">
-      <mat-card-header>
-        
-      </mat-card-header>
       <mat-card-content>
-        <img src={{movie.ImagePath}} alt= {{movie.Title}} width="180"/>
+        <img src={{movie.ImagePath}} alt={{movie.Title}} width="220"/>
         <button class="remove-button" mat-button color="accent" (click)="removeFav(movie._id)">
-          <mat-icon>favorite_border</mat-icon>
+          <mat-icon>favorite</mat-icon>
         </button>
       </mat-card-content>
     </mat-card>

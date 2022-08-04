@@ -16,10 +16,9 @@ export class ProfilePageComponent implements OnInit {
   username: any = localStorage.getItem('user');
   favMovies: any[] = [];
   favs: any = null;
-  displayElement: boolean = false;
-
+  
   constructor(
-    public fetchDataApi: UserRegistrationService,
+    public fetchApiData: UserRegistrationService,
     public snackBar: MatSnackBar,
     public dialog: MatDialog,
     public router: Router
@@ -33,14 +32,13 @@ export class ProfilePageComponent implements OnInit {
     const user = localStorage.getItem('user');
 
     if (user) {
-      this.fetchDataApi.getUser().subscribe((resp: any) => {
+      this.fetchApiData.getUser().subscribe((resp: any) => {
         this.user = resp;
-        this.fetchDataApi.getAllMovies().subscribe((resp: any) => {
+        this.fetchApiData.getAllMovies().subscribe((resp: any) => {
           this.movies = resp;
           this.movies.forEach((movie: any) => {
             if (this.user.FavoriteMovies.includes(movie._id)) {
               this.favMovies.push(movie);
-              this.displayElement = true;
             }
           })
         })
@@ -58,15 +56,40 @@ export class ProfilePageComponent implements OnInit {
     })
   }
 
+  isFav(id: string): boolean {
+    return this.favMovies.includes(id);
+  }
+
   // remove favorite Movie 
   removeFav(id: string): void {
-    this.fetchDataApi.removeFavorite(id).subscribe((res: any) => {
-      this.snackBar.open('{{movie.Title}} was removed.', 'OK', {
+    this.fetchApiData.removeFavorite(id).subscribe((res: any) => {
+      this.snackBar.open('Removed', 'OK', {
         duration: 2000,
       });
       this.ngOnInit();
       window.location.reload();
       return this.favs;
     })
+  }
+
+  logout(): void {
+    localStorage.clear();
+    this.router.navigate(['welcome']);
+  }
+
+// Deletes existing User with a browser alert window
+// Makes API DELETE request
+// Navigates to Welcome page and clears local storage
+  deleteUser(): void {
+    if (confirm('Are you sure you want to delete your account? This cannot be undone.')) {
+      this.router.navigate(['welcome']).then(() => {
+        this.snackBar.open('Your account has been deleted.', 'OK', {
+          duration: 2000,
+        });
+      })
+      this.fetchApiData.deleteUser().subscribe((result) => {
+        localStorage.clear();
+      });
+    }
   }
 }
