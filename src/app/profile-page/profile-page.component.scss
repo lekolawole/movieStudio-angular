@@ -1,12 +1,38 @@
 $primary: #FF4080;
 
+.nav-container {
+  padding-bottom: 2%;
+  display: flex;
+  // padding-bottom: 2%;
+}
+.movies-back-btn {
+  margin: 2%;
+}
+.account-btn {
+  margin: 2%;
+}
+
 .profile-container {
   //margin-top: 2%;
   background-color: black;
+  height: 100%;
 }
 
-.nav-container {
-  padding: 2%;
+.profile-btns {
+  display: flex;
+  flex-direction: row;
+}
+.delete-btn {
+  margin-left: 70%;
+}
+
+h1 {
+  color: white;
+  margin: 0 auto;
+  padding-top: 2%;
+  font-weight: bold;
+  letter-spacing: 0.6rem;
+  text-transform: uppercase;
 }
 
 .card-container {
@@ -23,6 +49,9 @@ $primary: #FF4080;
   background-color: #3F50B5;
   margin-top: 3%;
   margin-bottom: 5%;
+}
+.displayMessage {
+  color: white;
 }
 
 .scroll-container {

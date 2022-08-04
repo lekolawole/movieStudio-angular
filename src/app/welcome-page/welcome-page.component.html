@@ -1,9 +1,11 @@
 <div class="main-page">
-  <h1>
-    Welcome to Movie Studio!
+  <h1 class="logo-heading">
+    Welcome <br />
+    to <br />
+    <span>Movie Studio</span>!
   </h1>
-<!-- Adding the click event on the signup button -->
-  <button
+  <div class="btn-container">
+    <button
     mat-raised-button
     (click)="openUserRegistrationDialog()"
     style="margin-right: 10px;"
@@ -18,11 +20,5 @@
   >
     Login
   </button>
-  <!-- <button
-    mat-raised-button
-    color="primary"
-    (click)="openMoviesDialog()"
-  >
-    All Movies
-  </button> -->
+  </div>
 </div>

@@ -1,0 +1,37 @@
+.main-page {
+  // background-color: black;
+  background-image: url('https://images.pexels.com/photos/6177645/pexels-photo-6177645.jpeg?auto=compress&cs=tinysrgb&w=1200');
+  height: 100%;
+}
+
+.logo-heading {
+  background-color: black;
+  color: white;
+  // padding-top: 10%;
+  // margin-left: 40%;
+  text-align: center;
+  line-height: 4rem;
+  font-weight: bolder;
+}
+
+span {
+  text-transform: uppercase;
+  letter-spacing: 0.6rem;
+}
+
+.btn-container {
+  margin-top: 2%;
+  margin-left: 35%;
+}
+
+button:hover {
+  background-color: rgba($color: #9d76b5, $alpha: 1.0);
+  // opacity: 0.7;
+}
+
+button {
+  padding-left: 5%;
+  padding-right: 5%;
+  margin: 5%;
+  font-size: larger;
+}
