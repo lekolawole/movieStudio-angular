@@ -5,19 +5,21 @@ import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 
-//Declaring the api url that will provide data for the client app
+// Declaring the api url that will provide data for the client app
 const apiUrl = 'https://my-flix-22.herokuapp.com';
 @Injectable({
   providedIn: 'root'
 })
 export class UserRegistrationService {
-  // Inject the HttpClient module to the constructor params
- // This will provide HttpClient to the entire class, making it available via this.http
+  /* 
+   * Inject the HttpClient module to the constructor params
+   * This will provide HttpClient to the entire class, making it available via this.http
+ */
   constructor(private http: HttpClient) {
   }
- // Making the api call for the user registration endpoint
+ // Making the api call for the user registration endpoint - expects @params userDetails
   public userRegistration(userDetails: any): Observable<any> {
-    console.log(userDetails);
+    //console.log(userDetails);
     return this.http.post(apiUrl + '/users', userDetails).pipe(
       catchError(this.handleError)
     );
@@ -25,7 +27,7 @@ export class UserRegistrationService {
 
   // Handles api call for registered user to login
   public userLogin(userDetails: any): Observable<any> {
-    console.log(userDetails);
+    //console.log(userDetails);
     return this.http.post(apiUrl + '/login', userDetails).pipe(
       catchError(this.handleError)
     );
@@ -43,7 +45,7 @@ export class UserRegistrationService {
     );
   }
 
-  // Handles Profile 
+  // Handles Profile Page
   getUser(): Observable<any> {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('user');
@@ -71,7 +73,7 @@ export class UserRegistrationService {
     );
   }
 
-  // Handles Adding movie to favorites 
+  // Handles Adding movie to favorites - expects @params movieID & username
   addFavorite(movieID: string): Observable<any> {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('user');
@@ -85,7 +87,7 @@ export class UserRegistrationService {
     );
   }
 
-  // Handles removing movies
+  // Handles removing movies - expects @params movieID & username
   removeFavorite(movieID: any): Observable<any> {
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('user');

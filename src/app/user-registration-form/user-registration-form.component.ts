@@ -36,7 +36,7 @@ registerUser(): void {
   // Logic for a successful user registration goes here! (To be implemented)
      this.dialogRef.close(); // This will close the modal on success!
      console.log(result);
-     this.snackBar.open('Registration Sucessful!', 'OK', {
+     this.snackBar.open('Registration Sucessful! Please login.', 'OK', {
         duration: 2000
      });
     }, (result) => {
@@ -44,8 +44,6 @@ registerUser(): void {
         duration: 2000
       });
     });
-    // Navigate to movies page
-    this.router.navigate(['movies']);
   }
 
 }
