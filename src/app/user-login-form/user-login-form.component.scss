@@ -1,0 +1,9 @@
+// Responsive Design
+@media all and (max-width: 540px) {
+  .mat-card-header {
+    margin-left: 30%;
+  }
+  .mat-card-content {
+    margin-left: 10%;
+  }
+}

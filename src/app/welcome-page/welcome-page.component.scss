@@ -35,3 +35,10 @@ button {
   margin: 5%;
   font-size: larger;
 }
+
+// Responsive Design
+@media all and (max-width: 540px) {
+ .btn-container {
+  margin-left: 25%;
+ }
+}
