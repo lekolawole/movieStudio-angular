@@ -4,7 +4,7 @@
       <mat-icon>home</mat-icon>
     </button>
         <h1>Movie Studio</h1>
-    <button class="account-btn" mat-raised-button color="primary" (click)="logout()">Logout</button>
+    <button class="account-btn" mat-raised-button color="accent" (click)="logout()">Logout</button>
   </nav>
   <mat-card class="card-container">
     <mat-card-header>
@@ -18,7 +18,7 @@
         <h3>Email: {{user.Email }}</h3> 
         <h3>Birthday: {{ user.Birthday | date }}</h3> 
         <div class="profile-btns">
-          <button mat-raised-button color="accent" (click)="openEditProfileDialog()">Edit</button>
+          <button class="edit-btn" mat-raised-button color="accent" (click)="openEditProfileDialog()">Edit</button>
           <button class="delete-btn" mat-raised-button color="primary" (click)="deleteUser()">
             <mat-icon>delete</mat-icon>Delete Account
           </button>
