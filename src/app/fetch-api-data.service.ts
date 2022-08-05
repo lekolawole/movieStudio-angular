@@ -23,30 +23,12 @@ export class UserRegistrationService {
     );
   }
 
-private handleError(error: HttpErrorResponse): any {
-    if (error.error instanceof ErrorEvent) {
-    console.error('Some error occurred:', error.error.message);
-    } else {
-    console.error(
-        `Error Status code ${error.status}, ` +
-        `Error body is: ${error.error}`);
-    }
-    return throwError(
-    'Something bad happened; please try again later.');
-  }
-
   // Handles api call for registered user to login
   public userLogin(userDetails: any): Observable<any> {
     console.log(userDetails);
     return this.http.post(apiUrl + '/login', userDetails).pipe(
       catchError(this.handleError)
     );
-  }
-
-  // Non-typed response extraction
-  private extractResponseData(res: Response | Object): any {
-    const body = res;
-    return body || { };
   }
 
   // Handles API to fetch movies
@@ -143,5 +125,23 @@ private handleError(error: HttpErrorResponse): any {
         map(this.extractResponseData),
         catchError(this.handleError)
     );
+  }
+
+    private extractResponseData(res: any): any {
+    const body = res;
+    return body || {};
+  }
+
+  // Handles Errors 
+  private handleError(error: HttpErrorResponse): any {
+    if (error.error instanceof ErrorEvent) {
+    console.error('Some error occurred:', error.error.message);
+    } else {
+    console.error(
+        `Error Status code ${error.status}, ` +
+        `Error body is: ${error.error}`);
+    }
+    return throwError(
+    'Something bad happened; please try again later.');
   }
 }

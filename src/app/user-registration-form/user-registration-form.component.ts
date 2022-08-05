@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 // You'll use this import to close the dialog on success
 import { MatDialogRef } from '@angular/material/dialog';
@@ -21,7 +22,9 @@ export class UserRegistrationFormComponent implements OnInit {
 constructor(
     public fetchApiData: UserRegistrationService,
     public dialogRef: MatDialogRef<UserRegistrationFormComponent>,
-    public snackBar: MatSnackBar) { }
+    public snackBar: MatSnackBar,
+    public router: Router
+    ) { }
 
 ngOnInit(): void {
 }
@@ -41,6 +44,8 @@ registerUser(): void {
         duration: 2000
       });
     });
+    // Navigate to movies page
+    this.router.navigate(['movies']);
   }
 
-  }
+}

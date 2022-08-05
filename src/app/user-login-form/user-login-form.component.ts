@@ -25,7 +25,6 @@ export class UserLoginFormComponent implements OnInit {
 
   loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe((result) => {
-  // Logic for a successful user login goes here! (To be implemented)
       this.dialogRef.close(); // This will close the modal on success!
       console.log(result);
 
@@ -36,12 +35,13 @@ export class UserLoginFormComponent implements OnInit {
       this.snackBar.open('Login Successful!', 'OK', {
           duration: 2000
       });
+          // Navigate to movies page
+          // Does not navigate if login is unsuccessful
+        this.router.navigate(['movies']);
       }, (result) => {
         this.snackBar.open(result, 'OK', {
           duration: 2000
       });
     });
-    // Navigate to movies page
-    this.router.navigate(['movies']);
   }
 }
