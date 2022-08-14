@@ -30,7 +30,7 @@ export class MovieCardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // Newly implemented function that will fetch movies from fetchApiDataService
+  // Newly implemented function that will fetch movies from fetchApiDataService
     this.getAllMovies();
     this.getUser();
   }
@@ -44,8 +44,11 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  // Opens Genre dialog
-  // expects name, description
+  /**
+   * Opens Genre dialog
+   * @param name 
+   * @param description 
+   */
   openGenreDialog(name: string, description: string): void {
     this.dialog.open(GenreCardComponent, {
       data: {
@@ -56,8 +59,11 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  // Opens Movie Director Dialog
-  // Expects name, bio
+  /**
+   * Opens Movie Director Dialog
+   * @param name 
+   * @param bio 
+   */
   openDirectorDialog(name: string, bio: string): void {
     this.dialog.open(DirectorCardComponent, {
       data: {
@@ -68,7 +74,10 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  // Opens Summary (movie details card) dialog
+  /**
+   * Opens Summary (movie details card) dialog
+   * @param description 
+   */
   openSummaryDialog(description: string): void {
     this.dialog.open(MovieDetailsCardComponent, {
       data: {
@@ -78,8 +87,11 @@ export class MovieCardComponent implements OnInit {
     })
   }
 
-  // Adds movies to Favorite Movies array 
-  // Expects Movie ID
+  /**
+   * Adds movies to Favorite Movies array
+   * Expects Movie ID
+   * @param id 
+   */ 
   addFavorite(id: string): void {
     const token = localStorage.getItem('token');
     this.fetchApiData.addFavorite(id).subscribe((response: any) => {
@@ -89,7 +101,9 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  // Gets user to check Favorites 
+  /**
+   * Checks favorites by getting user's data
+   */ 
   getUser(): void {
     const username = localStorage.getItem('user');
     this.fetchApiData.getUser().subscribe((response: any) => {
@@ -106,11 +120,20 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
-  // Checks if movie is already favorited (T/F)
+  /**
+   * Checks if movie is already favorited (T/F)
+   * @param id {string}
+   * @returns array of movie id's to display
+   */
   isFav(id: string): boolean {
     return this.favoriteMovies.includes(id);
   }
 
+  /**
+   * Removes selected movie from user's FavoriteMovies
+   * @param id {string}
+   * @returns array of movie id's to display
+   */
   removeFav(id: string): void {
     this.fetchApiData.removeFavorite(id).subscribe((res: any) => {
       this.ngOnInit();
@@ -118,10 +141,12 @@ export class MovieCardComponent implements OnInit {
     });
   }
 
+  // Navigates to user profile page
   toProfile(): void {
     this.router.navigate(['profile']);
   }
 
+  // Allows a user to logout
   logout(): void {
     localStorage.clear();
     this.router.navigate(['welcome']);
