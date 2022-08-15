@@ -1,0 +1,105 @@
+---
+sidebar_position: 4
+---
+
+# Angular Material UI
+
+This project is built with Angular Material, a great tool for building consistent UI's and speeding up the development process. Read more about Angular Material [here](https://material.angularjs.org/latest/getting-started)
+
+## Dialogs
+
+Find out more about [Material Dialogs](https://material.angularjs.org/latest/demo/dialog):
+
+```text title="Implement Material Dialogs"
+// highlight-start
+---
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+---
+// highlight-end
+```
+
+```jsx title="Adding the Dialog into your component"
+constructor(
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar,
+  ) { }
+```
+
+```jsx title="Animating Dialogs"
+this.dialogRef.close();
+this.snackBar.open('Login Successful!, 'OK', {
+  duration: 2000
+});
+```
+
+```jsx title="Making dialogs dynamic"
+/**
+   * Opens Genre dialog
+   * @param name 
+   * @param description 
+   */
+  openGenreDialog(name: string, description: string): void {
+    this.dialog.open(GenreCardComponent, {
+      data: {
+        Name: name, 
+        Description: description,
+      }, 
+      width: '480px',
+    });
+  }
+```
+
+## Cards
+
+Find out more about [Material Cards](https://material.angularjs.org/latest/demo/card)
+
+```text title="Implement Material Card"
+// highlight-start
+---
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+---
+// highlight-end
+```
+
+```jsx title="Using template HTML"
+<div class="movie-container">
+    <mat-card *ngFor="let movie of movies;" style="flex: 1 1 auto;" class="movie-card">
+        <mat-card-header>
+        <mat-card-title>{{movie.Title}}</mat-card-title>
+            <mat-card-subtitle>{{movie.ReleaseYear}}</mat-card-subtitle>
+            <button
+                mat-button
+                color="primary"
+                (click)="openGenreDialog(movie.Genre.Name, movie.Genre.Description)"
+            >
+                {{movie.Genre.Name}}
+            </button>
+        </mat-card-header>
+        <img src={{movie.ImagePath}} alt= {{movie.Title}} width="320"/>
+        <mat-card-actions>
+            <button
+                mat-button
+                color="primary"
+                (click)="openSummaryDialog(movie.Description)"
+            >
+                Plot
+            </button>
+            <button
+                mat-button
+                color="primary"
+                (click)="openDirectorDialog(movie.MovieDirector.Name, movie.MovieDirector.Bio)"
+            >
+                {{movie.MovieDirector.Name}}
+            </button>
+            <button mat-button *ngIf="!isFav(movie._id)" (click)="addFavorite(movie._id)" color="primary">
+                <mat-icon>favorite_border</mat-icon>
+            </button>
+            <button mat-button *ngIf="isFav(movie._id)" (click)="removeFav(movie._id)" color="primary">
+                <mat-icon>favorite</mat-icon>
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>
+```
