@@ -22,3 +22,9 @@
 Visit <a href='https://lekolawole.github.io/movieStudio-angular/welcome'>Movie Studio</a>
 <br />
 This project is based on an existing API and database. See server-side code <a href='https://github.com/lekolawole/myFlix'>here</a>.
+
+## Documentation
+
+View the project documentation by navigating to `/movie-studio-doc`.
+<br />
+Run the command ```npm start``` to view the app at localhost:3000.
