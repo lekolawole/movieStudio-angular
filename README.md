@@ -27,4 +27,4 @@ This project is based on an existing API and database. See server-side code <a h
 
 View the project documentation by navigating to `/movie-studio-doc`.
 <br />
-Run the command ```npm start``` to view the app at localhost:3000.
+Run the command ```npm start``` to view the app.
